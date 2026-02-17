@@ -120,7 +120,7 @@ azd up
 ```
 
 **Supported regions for Azure AI Foundry:**
-australiaeast, brazilsouth, canadaeast, eastus, eastus2, francecentral, germanywestcentral, japaneast, koreacentral, northcentralus, norwayeast, polandcentral, southafricanorth, southcentralus, southindia, spaincentral, swedencentral, switzerlandnorth, uksouth, westeurope, westu, westus3
+australiaeast, brazilsouth, canadaeast, eastus, eastus2, francecentral, germanywestcentral, japaneast, koreacentral, northcentralus, norwayeast, polandcentral, southafricanorth, southcentralus, southindia, spaincentral, swedencentral, switzerlandnorth, uksouth, westeurope, westus, westus3
 
 > **Note:** Make sure the selected region supports the AI models you plan to deploy. Check the [Azure AI Foundry model availability](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure) for region-specific model support.
 
