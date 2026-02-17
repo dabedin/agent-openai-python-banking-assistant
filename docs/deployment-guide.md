@@ -106,13 +106,15 @@ You can test different models and versions by changing the model sections in the
 
 ## Configuring Azure AI Foundry Location
 
-By default, Azure AI Foundry resources are deployed to **eastus**. If you need to deploy to a different region, you can set the location before running `azd up`:
+By default, Azure AI Foundry resources are deployed to the **same region as your main resource group** (specified by `AZURE_LOCATION`). 
+
+If you need to deploy Foundry to a different region than your other resources, you can set the location before running `azd up`:
 
 ```shell
 azd env set AZURE_FOUNDRY_RESOURCE_GROUP_LOCATION <your-region>
 ```
 
-For example, to deploy to West Europe:
+For example, to deploy Foundry to West Europe while keeping other resources in a different region:
 
 ```shell
 azd env set AZURE_FOUNDRY_RESOURCE_GROUP_LOCATION westeurope
@@ -122,7 +124,7 @@ azd up
 **Supported regions for Azure AI Foundry:**
 australiaeast, brazilsouth, canadaeast, eastus, eastus2, francecentral, germanywestcentral, japaneast, koreacentral, northcentralus, norwayeast, polandcentral, southafricanorth, southcentralus, southindia, spaincentral, swedencentral, switzerlandnorth, uksouth, westeurope, westus, westus3
 
-> **Note:** Make sure the selected region supports the AI models you plan to deploy. Check the [Azure AI Foundry model availability](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure) for region-specific model support.
+> **Note:** Make sure the selected region supports the AI models you plan to deploy. Check the [Azure AI Foundry model availability](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure) for region-specific model support. If you deploy to a region that doesn't support Foundry, the deployment will fail with a validation error.
 
 ## Running Agents locally
 Once you have created the Azure resources with `azd up` or `azd provision`, you can run all the apps locally (instead of using Azure Container Apps). For more details on how to run each app check:
