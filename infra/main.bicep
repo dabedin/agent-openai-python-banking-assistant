@@ -30,7 +30,7 @@ param aiProjectName string = ''
 
 // Look for the desired model in availability table. Default model is gpt-4o-mini:
 // https://learn.microsoft.com/azure/ai-services/openai/concepts/models#standard-deployment-model-availability
-@description('Location for the Foundry resource group')
+@description('Location for the Foundry resource group. Defaults to the main location if not specified.')
 @allowed([
   'australiaeast'
   'brazilsouth'
@@ -52,15 +52,10 @@ param aiProjectName string = ''
   'switzerlandnorth'
   'uksouth'
   'westeurope'
-  'westu'
+  'westus'
   'westus3'
 ])
-@metadata({
-  azd: {
-    type: 'location'
-  }
-})
-param foundryResourceGroupLocation string = 'eastus'
+param foundryResourceGroupLocation string = location
 param customFoundryResourceGroupLocation string = ''
 
 @description('Array of models to deploy')

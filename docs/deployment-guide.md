@@ -18,6 +18,7 @@ Once you have the project available locally, run the following commands if you d
     ```
     
     * This will provision Azure resources and deploy this sample to those resources.
+    * **Important:** When prompted for `AZURE_LOCATION`, ensure you select a region that supports Azure AI Foundry. See [supported regions](#configuring-azure-ai-foundry-location) below.
     * The project has been tested with gpt-4o and gpt-4.1 model which is currently available with several deployment options these regions. The default is global standard. For more info on deployments and updated region availability check [here](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?pivots=azure-openai&tabs=global-standard-aoai%2Cstandard-chat-completions%2Cglobal-standard#model-summary-table-and-region-availability)
 
 
@@ -103,6 +104,42 @@ You can test different models and versions by changing the model sections in the
       ]
     }
 ```
+
+## Configuring Azure AI Foundry Location
+
+By default, Azure AI Foundry resources are deployed to the **same region as your main resource group** (specified by `AZURE_LOCATION`). 
+
+> **⚠️ Important:** Azure AI Foundry is only available in specific regions. If you set `AZURE_LOCATION` to a region not supported by Foundry, **the deployment will fail with a validation error**. This is intentional to prevent deploying to unsupported regions.
+
+**Supported regions for Azure AI Foundry:**
+australiaeast, brazilsouth, canadaeast, eastus, eastus2, francecentral, germanywestcentral, japaneast, koreacentral, northcentralus, norwayeast, polandcentral, southafricanorth, southcentralus, southindia, spaincentral, swedencentral, switzerlandnorth, uksouth, westeurope, westus, westus3
+
+### Choosing a Compatible Region
+
+When running `azd up`, make sure to choose one of the supported regions above for `AZURE_LOCATION`. For example:
+
+```shell
+azd env set AZURE_LOCATION eastus
+azd up
+```
+
+### Deploying Foundry to a Different Region
+
+If you need to deploy Foundry to a different region than your other resources, you can set the location before running `azd up`:
+
+```shell
+azd env set AZURE_FOUNDRY_RESOURCE_GROUP_LOCATION <your-region>
+```
+
+For example, to deploy Foundry to West Europe while keeping other resources in a different region:
+
+```shell
+azd env set AZURE_LOCATION centralus  # Main resources
+azd env set AZURE_FOUNDRY_RESOURCE_GROUP_LOCATION westeurope  # Foundry in different region
+azd up
+```
+
+> **Note:** The `foundryResourceGroupLocation` parameter is **not prompted** during deployment. It automatically inherits from `AZURE_LOCATION` unless you explicitly set `AZURE_FOUNDRY_RESOURCE_GROUP_LOCATION`. Make sure the selected region supports the AI models you plan to deploy. Check the [Azure AI Foundry model availability](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure) for region-specific model support.
 
 ## Running Agents locally
 Once you have created the Azure resources with `azd up` or `azd provision`, you can run all the apps locally (instead of using Azure Container Apps). For more details on how to run each app check:

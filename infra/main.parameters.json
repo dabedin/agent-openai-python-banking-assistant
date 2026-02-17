@@ -44,6 +44,9 @@
     "storageSkuName": {
       "value": "${AZURE_STORAGE_SKU=Standard_LRS}"
     },
+    "foundryResourceGroupLocation": {
+      "value": "${AZURE_FOUNDRY_RESOURCE_GROUP_LOCATION=${AZURE_LOCATION}}"
+    },
     "models": {
       "value": [
         {
